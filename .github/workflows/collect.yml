@@ -14,8 +14,8 @@ on:
     - cron: '0 0 * * 3,6'
     # M365 & Copilot     : 수/토 12:00 KST (= 03:00 UTC) — --board ms
     - cron: '0 3 * * 3,6'
-    # IT 소식     : 화/금 15:00 KST (= 06:00 UTC) — --board it
-    - cron: '0 6 * * 2,5'
+    # IT 소식     : 매일 15:00 KST (= 06:00 UTC) — --board it
+    - cron: '0 6 * * *'
   workflow_dispatch:
     inputs:
       board:
@@ -60,8 +60,8 @@ jobs:
             HOUR=$(date -u +%H)
             DOW=$(date -u +%u)   # 1=월 … 7=일
             BOARD="all"
-            # 화/금 06:00 UTC → IT 소식 (15:00 KST)
-            if [[ "$HOUR" == "06" && ("$DOW" == "2" || "$DOW" == "5") ]]; then
+            # 매일 06:00 UTC → IT 소식 (15:00 KST)
+            if [[ "$HOUR" == "06" ]]; then
               BOARD="it"
             # 00:00 / 03:00 UTC 어떤 요일이든 → MS 게시판
             elif [[ "$HOUR" == "00" || "$HOUR" == "03" ]]; then
