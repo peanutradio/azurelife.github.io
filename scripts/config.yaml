@@ -1,0 +1,135 @@
+# RSS 수집 설정
+# Hugo 사이트 콘텐츠 기본 경로 (scripts/ 디렉토리 기준 상대 경로)
+hugo_content_dir: "../content"
+
+# 중복 추적 파일
+published_urls_file: ".published_urls.json"
+
+# 최대 수집 글 수 (보드별 1회 실행당)
+max_posts_per_run: 10
+
+# IT 소식 보드 설정
+boards:
+  it:
+    name: "IT 소식"
+    content_path: "it-news"
+    ai_ratio: 0.70       # AI 글 목표 비율
+    other_it_ratio: 0.30  # 기타 IT 글 목표 비율
+    max_posts_per_run: 10
+
+    ai_keywords:
+      - "AI"
+      - "LLM"
+      - "GPT"
+      - "machine learning"
+      - "neural"
+      - "deep learning"
+      - "artificial intelligence"
+      - "large language model"
+      - "generative AI"
+      - "ChatGPT"
+      - "Claude"
+      - "Gemini"
+      - "Llama"
+      - "diffusion"
+      - "transformer"
+      - "foundation model"
+      - "fine-tuning"
+      - "RAG"
+      - "vector"
+      - "embedding"
+
+    sources:
+      ai:
+        - name: "OpenAI Blog"
+          url: "https://openai.com/blog/rss.xml"
+          type: "rss"
+        - name: "Google AI Blog"
+          url: "https://blog.google/technology/ai/rss/"
+          type: "rss"
+        - name: "Anthropic Blog"
+          url: "https://www.anthropic.com/rss.xml"
+          type: "rss"
+        - name: "Hugging Face Blog"
+          url: "https://huggingface.co/blog/feed.xml"
+          type: "rss"
+        - name: "TechCrunch AI"
+          url: "https://techcrunch.com/category/artificial-intelligence/feed/"
+          type: "rss"
+        - name: "The Verge AI"
+          url: "https://www.theverge.com/ai-artificial-intelligence/rss/index.xml"
+          type: "rss"
+
+      other:
+        - name: "Ars Technica"
+          url: "https://feeds.arstechnica.com/arstechnica/index"
+          type: "rss"
+        - name: "Hacker News"
+          url: "https://news.ycombinator.com/rss"
+          type: "rss"
+
+  ms:
+    name: "MS 게시판"
+    content_path: "microsoft"
+    max_posts_per_run: 15
+
+    subcategories:
+      azure:
+        name: "Azure"
+        content_path: "microsoft/azure"
+        sources:
+          - name: "Azure Updates"
+            url: "https://azurecomcdn.azureedge.net/en-us/updates/feed/"
+            type: "rss"
+          - name: "Azure Blog"
+            url: "https://azure.microsoft.com/en-us/blog/feed/"
+            type: "rss"
+
+      github:
+        name: "GitHub"
+        content_path: "microsoft/github"
+        sources:
+          - name: "GitHub Blog"
+            url: "https://github.blog/feed/"
+            type: "rss"
+          - name: "GitHub Changelog"
+            url: "https://github.blog/changelog/feed/"
+            type: "rss"
+
+      ai_foundry:
+        name: "AI Foundry"
+        content_path: "microsoft/ai-foundry"
+        sources:
+          - name: "Microsoft AI Blog"
+            url: "https://blogs.microsoft.com/ai/feed/"
+            type: "rss"
+
+      fabric:
+        name: "Fabric"
+        content_path: "microsoft/fabric"
+        sources:
+          - name: "Microsoft Fabric Blog"
+            url: "https://blog.fabric.microsoft.com/en-us/blog/feed"
+            type: "rss"
+
+      security:
+        name: "보안"
+        content_path: "microsoft/security"
+        sources:
+          - name: "Microsoft Security Blog"
+            url: "https://www.microsoft.com/en-us/security/blog/feed/"
+            type: "rss"
+          - name: "MSRC"
+            url: "https://msrc.microsoft.com/blog/feed/"
+            type: "rss"
+
+      m365:
+        name: "M365 & Copilot"
+        content_path: "microsoft/m365-copilot"
+        sources:
+          - name: "Microsoft 365 Blog"
+            url: "https://www.microsoft.com/en-us/microsoft-365/blog/feed/"
+            type: "rss"
+          - name: "Microsoft 365 Roadmap"
+            url: "https://www.microsoft.com/en-us/microsoft-365/roadmap/rss"
+            type: "rss"
