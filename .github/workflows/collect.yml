@@ -77,7 +77,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase
           git add content/ scripts/.published_urls.json 2>/dev/null || git add content/
           if git diff --cached --quiet; then
             echo "새 포스트 없음 — 커밋 생략"
@@ -86,5 +85,6 @@ jobs:
             git commit -m "feat: 새 포스트 ${POST_COUNT}건 수집 [board: ${{ steps.board.outputs.board }}]
 
           Co-Authored-By: Paperclip <noreply@paperclip.ing>"
+            git pull --rebase
             git push
           fi
