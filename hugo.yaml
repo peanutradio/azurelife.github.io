@@ -67,6 +67,10 @@ menu:
       name: IT 뉴스
       url: /it-news/
       weight: 20
+    - identifier: nav-market-board
+      name: 주식/크립토
+      url: /market-board/
+      weight: 25
     - identifier: nav-tags
       name: 태그
       url: /tags/

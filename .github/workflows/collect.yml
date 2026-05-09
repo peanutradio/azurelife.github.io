@@ -16,10 +16,12 @@ on:
     - cron: '0 3 * * 3,6'
     # IT 소식     : 매일 15:00 KST (= 06:00 UTC) — --board it
     - cron: '0 6 * * *'
+    # 주식/크립토 시황 : 매일 09:00 KST (= 00:00 UTC) — --board market
+    - cron: '30 0 * * *'
   workflow_dispatch:
     inputs:
       board:
-        description: '수집할 게시판 (all / it / ms)'
+        description: '수집할 게시판 (all / it / ms / market)'
         required: false
         default: 'all'
 
@@ -58,12 +60,15 @@ jobs:
             echo "board=${{ github.event.inputs.board }}" >> "$GITHUB_OUTPUT"
           else
             HOUR=$(date -u +%H)
-            DOW=$(date -u +%u)   # 1=월 … 7=일
+            MINUTE=$(date -u +%M)
             BOARD="all"
             # 매일 06:00 UTC → IT 소식 (15:00 KST)
             if [[ "$HOUR" == "06" ]]; then
               BOARD="it"
-            # 00:00 / 03:00 UTC 어떤 요일이든 → MS 게시판
+            # 00:30 UTC → 주식/크립토 시황 (09:30 KST)
+            elif [[ "$HOUR" == "00" && "$MINUTE" -ge 25 ]]; then
+              BOARD="market"
+            # 00:00 / 03:00 UTC → MS 게시판
             elif [[ "$HOUR" == "00" || "$HOUR" == "03" ]]; then
               BOARD="ms"
             fi
@@ -71,7 +76,15 @@ jobs:
           fi
 
       - name: RSS 수집
+        if: steps.board.outputs.board != 'market'
         run: python scripts/collect_rss.py --board ${{ steps.board.outputs.board }}
+
+      - name: 시황 수집
+        if: steps.board.outputs.board == 'market' || steps.board.outputs.board == 'all'
+        env:
+          COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: python scripts/collect_market.py
 
       - name: 새 포스트 커밋 & 푸시
         run: |

@@ -68,6 +68,55 @@ boards:
           url: "https://news.ycombinator.com/rss"
           type: "rss"
 
+  market:
+    name: "주식/크립토 시황"
+    content_path: "market-board"
+    max_posts_per_run: 1
+
+    coin_ids:
+      - bitcoin
+      - ethereum
+      - solana
+      - ripple
+      - cardano
+      - polkadot
+      - avalanche-2
+      - chainlink
+      - matic-network
+      - cosmos
+
+    news_sources:
+      - name: "블록미디어"
+        url: "https://www.blockmedia.co.kr/feed/"
+      - name: "코인니스"
+        url: "https://coinness.com/feed"
+      - name: "CoinDesk"
+        url: "https://www.coindesk.com/arc/outboundfeeds/rss/"
+      - name: "CoinTelegraph"
+        url: "https://cointelegraph.com/rss"
+      - name: "The Block"
+        url: "https://www.theblock.co/rss.xml"
+      - name: "Decrypt"
+        url: "https://decrypt.co/feed"
+      - name: "Bitcoin Magazine"
+        url: "https://bitcoinmagazine.com/.rss/full/"
+      - name: "CryptoSlate"
+        url: "https://cryptoslate.com/feed/"
+
+    youtube_channels:
+      - name: "Coin Bureau"
+        id: "UCqK_GSMbpiV8spgD3ZGloSw"
+        max_videos: 3
+      - name: "Michael Saylor"
+        id: "UCLsFBMR3MsHmRQfaLSm5l_g"
+        max_videos: 3
+      - name: "Crypto Lark"
+        id: "UCl2oCaw8hdR_kbqyqd2klIA"
+        max_videos: 3
+      - name: "CoinDesk Korea"
+        id: "UCsOV8mXsBEhqJwUeKqX7MHg"
+        max_videos: 3
+
   ms:
     name: "MS 게시판"
     content_path: "microsoft"
